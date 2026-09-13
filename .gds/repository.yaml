@@ -1,0 +1,49 @@
+schema_version: 1
+repository:
+  id: repo_01M2DB2M5888D7NQNK4N2J022B
+  display_name: garm upstream mirror
+  roles:
+    - mirror
+  lifecycle: active
+provider:
+  type: github
+  installation: installation:github-personal
+  repository_id: 1351913420
+  owner: rldyourmnd
+  name: garm
+classification:
+  portfolios:
+    - portfolio:forks
+  visibility_contract: public
+  data_classification: public
+product:
+  purpose: Read-only estate mirror of the upstream GARM runner manager used to inspect upstream implementation and track compatibility with the NDDev runner fleet.
+  capabilities:
+    - Inspect upstream GARM runner-management behavior
+    - Compare estate integrations with upstream releases
+  entrypoints:
+    - change: Inspect controller and API behavior
+      path: apiserver
+    - change: Inspect provider and runner lifecycle documentation
+      path: doc
+    - change: Inspect build and verification commands
+      path: Makefile
+policy:
+  profiles:
+    - repository-default
+    - personal-default
+  rollout_ring: standard
+git:
+  default_branch: main
+  integration: pull-request
+  branch_model: task-branches
+  handoff_pr: preferred
+  cleanup: merged-only
+agent:
+  context_profile: project-default
+  generated_agents: false
+  serena:
+    enabled: true
+    provenance_required: true
+release:
+  mode: none
